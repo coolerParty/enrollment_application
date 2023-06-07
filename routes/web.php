@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Livewire\Admin\AdminDashboardComponent;
+use App\Http\Livewire\Admin\CourseAddComponent;
+use App\Http\Livewire\Admin\CourseComponent;
+use App\Http\Livewire\Admin\CourseEditComponent;
 use App\Http\Livewire\Admin\SchoolYearAddComponent;
 use App\Http\Livewire\Admin\SchoolYearComponent;
 use App\Http\Livewire\Admin\SchoolYearEditComponent;
@@ -56,6 +59,7 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified', 'role_or_permission:super-admin|dashboard-access|admin'
 ])->prefix('admin')->name('admin.')->group(function () {
+
     Route::get('/', AdminDashboardComponent::class)->name('dashboard');
 
     Route::get('/subject', SubjectComponent::class)->name('subject.index');
@@ -65,6 +69,10 @@ Route::middleware([
     Route::get('/school-year', SchoolYearComponent::class)->name('schoolyear.index');
     Route::get('/school-year/create', SchoolYearAddComponent::class)->name('schoolyear.create');
     Route::get('/school-year/{school_year_id}/edit', SchoolYearEditComponent::class)->name('schoolyear.edit');
+
+    Route::get('/course', CourseComponent::class)->name('course.index');
+    Route::get('/course/create', CourseAddComponent::class)->name('course.create');
+    Route::get('/course/{course_id}/edit', CourseEditComponent::class)->name('course.edit');
 
 });
 

@@ -1,5 +1,5 @@
 <div>
-    @section('title', 'School Year Edit')
+    @section('title', 'School Year / Edit')
     <!-- Main content header -->
     <div
         class="flex flex-col items-start justify-between pb-6 mb-2 space-y-4 border-b lg:items-center lg:space-y-0 lg:flex-row">
