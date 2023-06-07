@@ -51,6 +51,73 @@
                     <span :class="{ 'lg:hidden': !isSidebarOpen }">Dashboard</span>
                 </a>
             </li>
+            <li title="Entries" x-data="{
+                open: false,
+                toggle() {
+                    if (this.open) {
+                        return this.close()
+                    }
+
+                    this.$refs.button.focus()
+
+                    this.open = true
+                },
+                close(focusAfter) {
+                    if (! this.open) return
+
+                    this.open = false
+
+                    focusAfter && focusAfter.focus()
+                }
+            }" x-on:keydown.escape.prevent.stop="close($refs.button)"
+                x-on:focusin.window="! $refs.panel.contains($event.target) && close()" x-id="['dropdown-button']">
+
+                <a class="relative flex items-center w-full p-2 space-x-2 cursor-pointer hover:bg-gray-100
+                    {{ (route('admin.subject.index') == substr(url()->current(), 0, strlen(route('admin.subject.index')) )) ? 'bg-gray-100' : '' }}
+                " :class="{'justify-center': !isSidebarOpen}" x-ref="button" x-on:click="toggle()"
+                    :aria-expanded="open" :aria-controls="$id('dropdown-button')">
+                    <span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-400" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
+                        </svg>
+                    </span>
+                    <span :class="{ 'lg:hidden': !isSidebarOpen }">Entries</span>
+                    <span class="absolute right-2" :class="{ 'lg:hidden': !isSidebarOpen }">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-2 transition-all"
+                            :class="{'rotate-90': open}" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                            stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </span>
+                </a>
+                <ul x-ref="panel" x-show="open" x-transition:enter="transition ease-out duration-300"
+                    x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100"
+                    x-transition:leave="transition ease-in duration-300"
+                    x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90"
+                    :id="$id('dropdown-button')" style="display: none;">
+                    @can('subject-show')
+                    <li title="Subject">
+                        <a class="flex items-center p-2 space-x-2 text-sm border-b hover:bg-gray-100
+                        {{ (route('admin.subject.index') == substr(url()->current(), 0, strlen(route('admin.subject.index')) )) ? 'bg-gray-100' : '' }}
+                        " :class="{'justify-center': !isSidebarOpen}"
+                            href="{{ route('admin.subject.index') }}">
+                            <span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20"
+                                    fill="currentColor">
+                                    <path d="M4 3a2 2 0 100 4h12a2 2 0 100-4H4z" />
+                                    <path fill-rule="evenodd"
+                                        d="M3 8h14v7a2 2 0 01-2 2H5a2 2 0 01-2-2V8zm5 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </span>
+                            <span :class="{ 'lg:hidden': !isSidebarOpen }">Subject</span>
+                        </a>
+                    </li>
+                    @endcan
+                </ul>
+            </li>
             <li title="Menu Parent" x-data="{
                 open: false,
                 toggle() {
@@ -173,9 +240,7 @@
             }" x-on:keydown.escape.prevent.stop="close($refs.button)"
                 x-on:focusin.window="! $refs.panel.contains($event.target) && close()" x-id="['dropdown-button']">
 
-                <a class="relative flex items-center w-full p-2 space-x-2 cursor-pointer hover:bg-gray-100
-                    mmmmmmmm
-                " :class="{'justify-center': !isSidebarOpen}" x-ref="button" x-on:click="toggle()"
+                <a class="relative flex items-center w-full p-2 space-x-2 cursor-pointer hover:bg-gray-100 mmmmmmmm " :class="{'justify-center': !isSidebarOpen}" x-ref="button" x-on:click="toggle()"
                     :aria-expanded="open" :aria-controls="$id('dropdown-button')">
                     <span>
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-400" fill="none"
