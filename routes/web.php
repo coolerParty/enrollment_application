@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Livewire\Admin\AdminDashboardComponent;
+use App\Http\Livewire\Admin\SchoolYearAddComponent;
+use App\Http\Livewire\Admin\SchoolYearComponent;
+use App\Http\Livewire\Admin\SchoolYearEditComponent;
 use App\Http\Livewire\Admin\SubjectAddComponent;
 use App\Http\Livewire\Admin\SubjectComponent;
 use App\Http\Livewire\Admin\SubjectEditComponent;
@@ -59,7 +62,9 @@ Route::middleware([
     Route::get('/subject/create', SubjectAddComponent::class)->name('subject.create');
     Route::get('/subject/{subject_id}/edit', SubjectEditComponent::class)->name('subject.edit');
 
-
+    Route::get('/school-year', SchoolYearComponent::class)->name('schoolyear.index');
+    Route::get('/school-year/create', SchoolYearAddComponent::class)->name('schoolyear.create');
+    Route::get('/school-year/{school_year_id}/edit', SchoolYearEditComponent::class)->name('schoolyear.edit');
 
 });
 

@@ -29,6 +29,10 @@ class PermissionSeeder extends Seeder
 				'subject-edit',
 				'subject-show',
 				'subject-delete',
+                'school-year-create',
+				'school-year-edit',
+				'school-year-show',
+				'school-year-delete',
 
 			];
 
@@ -60,6 +64,10 @@ class PermissionSeeder extends Seeder
 				'subject-edit',
 				'subject-show',
 				'subject-delete',
+                'school-year-create',
+				'school-year-edit',
+				'school-year-show',
+				'school-year-delete',
 			];
 
 			foreach($adminPermissions as $permission){
