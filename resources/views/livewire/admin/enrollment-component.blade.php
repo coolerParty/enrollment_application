@@ -1,11 +1,11 @@
 <div>
-    @section('title', 'Admin / Course')
+    @section('title', 'Admin / Enrollment')
     <!-- Main content header -->
     <div
         class="flex flex-col items-start justify-between pb-6 space-y-4 border-b lg:items-center lg:space-y-0 lg:flex-row">
-        <h1 class="text-2xl font-semibold whitespace-nowrap">Course</h1>
-        @can('course-create')
-        <a href="{{ route('admin.course.create') }}"
+        <h1 class="text-2xl font-semibold whitespace-nowrap">Enrollment</h1>
+        @can('enrollment-create')
+        <a href="#"
             class="inline-flex items-center px-6 py-2 space-x-1 text-white bg-purple-600 rounded-md shadow hover:bg-opacity-95">
             <span>
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
@@ -27,19 +27,27 @@
                             <tr>
                                 <th scope="col"
                                     class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                                    Course Name
+                                    Student Photo
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                                    Course Description
+                                    Student
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                                    GPA
+                                    Course
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                                    Limit
+                                    Subject
+                                </th>
+                                <th scope="col"
+                                    class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                    School Year
+                                </th>
+                                <th scope="col"
+                                    class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                    Created Date
                                 </th>
                                 <th scope="col" class="relative px-6 py-3">
                                     Action
@@ -136,30 +144,46 @@
                             <!-- flash message End -->
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
-                            @forelse($courses as $course)
+                            @forelse($enrollments as $enrollment)
                             <tr class="transition-all hover:bg-gray-100 ">
                                 <td class="px-6 py-4">
-                                    <div class="text-sm font-semibold text-gray-900">{{ $course->course_name }}</div>
+                                    @if($enrollment->user->profile_photo_path)
+                                    <img class="object-cover w-10 h-10 rounded-md cursor-pointer hover:shadow-lg"
+                                        src="{{ asset('storage/assets/user/profile-photo/thumbnail') }}/{{ $order->user->profile_photo_path }}" />
+                                    @else
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20"
+                                        fill="currentColor">
+                                        <path fill-rule="evenodd"
+                                            d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                    @endif
                                 </td>
                                 <td class="px-6 py-4">
-                                    <div class="text-sm font-semibold text-gray-900">{{ $course->course_description }}</div>
+                                    <div class="text-sm font-semibold text-gray-900">{{ $enrollment->user->name }}</div>
                                 </td>
                                 <td class="px-6 py-4">
-                                    <div class="text-sm font-semibold text-gray-900">{{ $course->gpa }}%</div>
+                                    <div class="text-sm font-semibold text-gray-900">{{ $enrollment->course->course_name }}</div>
                                 </td>
                                 <td class="px-6 py-4">
-                                    <div class="text-sm font-semibold text-gray-900">{{ $course->student_limit }}</div>
+                                    <div class="text-sm font-semibold text-gray-900">{{ $enrollment->subject->sub_name }}</div>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <div class="text-sm font-semibold text-gray-900">{{ $enrollment->schoolYear->school_yr }}</div>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <div class="text-sm font-semibold text-gray-900">{{ $enrollment->created_date }}</div>
                                 </td>
                                 <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
                                     @can('school-year-edit')
                                     <x-link-success
-                                        href="{{ route('admin.course.edit', ['course_id' => $course->id]) }}"> Edit
+                                        href="#"> Edit
                                     </x-link-success>
                                     @endcan
                                     @can('school-year-delete')
                                     <x-link-danger href="" class="btn btn-danger btn-sm text-light"
                                         onclick="confirm('Are you sure, You want to delete this school Year?') || event.stopImmediatePropagation()"
-                                        wire:click.prevent="destroy({{ $course->id }})">
+                                        wire:click.prevent="destroy({{ $enrollment->id }})">
                                         Delete
                                     </x-link-danger>
                                     @endcan
@@ -167,15 +191,15 @@
                             </tr>
                             @empty
                             <tr class="transition-all hover:bg-gray-100 hover:shadow-lg">
-                                <td class="px-6 py-4 text-center whitespace-nowrap" colspan="4">
-                                    <div class="text-sm font-medium text-gray-900">No Course Found!</div>
+                                <td class="px-6 py-4 text-center whitespace-nowrap" colspan="6">
+                                    <div class="text-sm font-medium text-gray-900">No Enrollment Found!</div>
                                 </td>
                             </tr>
                             @endforelse
                         </tbody>
                     </table>
                     <div class="p-4">
-                        {!! $courses->links() !!}
+                        {!! $enrollments->links() !!}
                     </div>
                 </div>
             </div>
