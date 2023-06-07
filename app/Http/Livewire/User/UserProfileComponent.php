@@ -11,11 +11,11 @@ class UserProfileComponent extends Component
 {
     public function render()
     {
-        $user = User::select('name','email','profile_photo_path')->find(Auth::user()->id);
+        $user = User::select('id','name','email','profile_photo_path')->find(Auth::user()->id);
         $userProfile = Profile::select('id','user_id','firstname','lastname','mobile','city','province','country')
 					->where('user_id', Auth::user()->id)->first();
 
-			if(empty($userProfile))
+			if(!$userProfile)
 			{
 				$profile = new Profile();
 				$profile->user_id = $user->id;

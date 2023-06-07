@@ -1,11 +1,11 @@
 <div>
-    @section('title', 'Admin / Course')
+    @section('title', 'Admin / Program')
     <!-- Main content header -->
     <div
         class="flex flex-col items-start justify-between pb-6 space-y-4 border-b lg:items-center lg:space-y-0 lg:flex-row">
-        <h1 class="text-2xl font-semibold whitespace-nowrap">Course</h1>
-        @can('course-create')
-        <a href="{{ route('admin.course.create') }}"
+        <h1 class="text-2xl font-semibold whitespace-nowrap">Program</h1>
+        @can('program-create')
+        <a href="{{ route('admin.program.create') }}"
             class="inline-flex items-center px-6 py-2 space-x-1 text-white bg-purple-600 rounded-md shadow hover:bg-opacity-95">
             <span>
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
@@ -27,19 +27,23 @@
                             <tr>
                                 <th scope="col"
                                     class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                                    Course Name
+                                    Course
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                                    Course Description
+                                    Subject
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                                    GPA
+                                    School Year
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                                    Limit
+                                    Status
+                                </th>
+                                <th scope="col"
+                                    class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                    Created Date
                                 </th>
                                 <th scope="col" class="relative px-6 py-3">
                                     Action
@@ -136,30 +140,40 @@
                             <!-- flash message End -->
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
-                            @forelse($courses as $course)
+                            @forelse($cps as $cp)
                             <tr class="transition-all hover:bg-gray-100 ">
                                 <td class="px-6 py-4">
-                                    <div class="text-sm font-semibold text-gray-900">{{ $course->course_name }}</div>
+                                    <div class="text-sm font-semibold text-gray-900">{{ $cp->course->course_name }}</div>
                                 </td>
                                 <td class="px-6 py-4">
-                                    <div class="text-sm font-semibold text-gray-900">{{ $course->course_description }}</div>
+                                    <div class="text-sm font-semibold text-gray-900">{{ $cp->subject->sub_name }}</div>
                                 </td>
                                 <td class="px-6 py-4">
-                                    <div class="text-sm font-semibold text-gray-900">{{ $course->gpa }}%</div>
+                                    <div class="text-sm font-semibold text-gray-900">{{ $cp->schoolYear->school_yr }}</div>
                                 </td>
                                 <td class="px-6 py-4">
-                                    <div class="text-sm font-semibold text-gray-900">{{ $course->student_limit }}</div>
+                                    <div class="text-sm font-semibold text-gray-900">
+                                        @if($cp->active)
+                                            <span class="bg-green-300 py-1 px-4 rounded-md">Active</span>
+                                        @else
+                                            <span class="bg-gray-300 py-1 px-4 rounded-md">Inactive</span>
+                                        @endif
+
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <div class="text-sm font-semibold text-gray-900">{{ $cp->created_at }}</div>
                                 </td>
                                 <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
                                     @can('school-year-edit')
                                     <x-link-success
-                                        href="{{ route('admin.course.edit', ['course_id' => $course->id]) }}"> Edit
+                                        href="{{ route('admin.program.edit',['program_id' => $cp->id ]) }}"> Edit
                                     </x-link-success>
                                     @endcan
                                     @can('school-year-delete')
                                     <x-link-danger href="" class="btn btn-danger btn-sm text-light"
-                                        onclick="confirm('Are you sure, You want to delete this school Year?') || event.stopImmediatePropagation()"
-                                        wire:click.prevent="destroy({{ $course->id }})">
+                                        onclick="confirm('Are you sure, You want to delete this Program?') || event.stopImmediatePropagation()"
+                                        wire:click.prevent="destroy({{ $cp->id }})">
                                         Delete
                                     </x-link-danger>
                                     @endcan
@@ -167,15 +181,15 @@
                             </tr>
                             @empty
                             <tr class="transition-all hover:bg-gray-100 hover:shadow-lg">
-                                <td class="px-6 py-4 text-center whitespace-nowrap" colspan="4">
-                                    <div class="text-sm font-medium text-gray-900">No Course Found!</div>
+                                <td class="px-6 py-4 text-center whitespace-nowrap" colspan="7">
+                                    <div class="text-sm font-medium text-gray-900">No Program Found!</div>
                                 </td>
                             </tr>
                             @endforelse
                         </tbody>
                     </table>
                     <div class="p-4">
-                        {!! $courses->links() !!}
+                        {!! $cps->links() !!}
                     </div>
                 </div>
             </div>

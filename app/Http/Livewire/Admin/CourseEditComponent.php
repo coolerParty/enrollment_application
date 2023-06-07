@@ -13,6 +13,7 @@ class CourseEditComponent extends Component
     public $course_name;
     public $course_description;
     public $gpa;
+    public $student_limit;
     public $course_id;
 
     public function mount($course_id)
@@ -26,6 +27,7 @@ class CourseEditComponent extends Component
         $this->course_name        = $course->course_name;
         $this->course_description = $course->course_description;
         $this->gpa                = $course->gpa;
+        $this->student_limit      = $course->student_limit;
     }
 
     public function updated($fields)
@@ -34,6 +36,7 @@ class CourseEditComponent extends Component
             'course_name'        => ['required', 'string', 'min:3', 'max:255', Rule::unique('courses')->ignore($this->course_id)],
             'course_description' => ['required', 'string', 'min:3' , 'max:255'],
             'gpa'                => ['required', 'numeric', 'min:0'],
+            'student_limit'      => ['required', 'numeric', 'min:0'],
         ]);
     }
 
@@ -45,6 +48,7 @@ class CourseEditComponent extends Component
             'course_name'        => ['required', 'string', 'min:3', 'max:255', Rule::unique('courses')->ignore($this->course_id)],
             'course_description' => ['required', 'string', 'min:3' , 'max:255'],
             'gpa'                => ['required', 'numeric', 'min:0'],
+            'student_limit'      => ['required', 'numeric', 'min:0'],
         ]);
 
         $course = Course::find($this->course_id);
@@ -55,6 +59,7 @@ class CourseEditComponent extends Component
         $course->course_name        = $this->course_name;
         $course->course_description = $this->course_description;
         $course->gpa                = $this->gpa;
+        $course->student_limit      = $this->student_limit;
         $course->save();
 
         return redirect()->route('admin.course.index')

@@ -76,6 +76,8 @@
                     {{ (route('admin.subject.index') == substr(url()->current(), 0, strlen(route('admin.subject.index')) )) ? 'bg-gray-100' : '' }}
                     {{ (route('admin.schoolyear.index') == substr(url()->current(), 0, strlen(route('admin.schoolyear.index')) )) ? 'bg-gray-100' : '' }}
                     {{ (route('admin.course.index') == substr(url()->current(), 0, strlen(route('admin.course.index')) )) ? 'bg-gray-100' : '' }}
+                    {{ (route('admin.enrollment.index') == substr(url()->current(), 0, strlen(route('admin.enrollment.index')) )) ? 'bg-gray-100' : '' }}
+                    {{ (route('admin.program.index') == substr(url()->current(), 0, strlen(route('admin.program.index')) )) ? 'bg-gray-100' : '' }}
                 " :class="{'justify-center': !isSidebarOpen}" x-ref="button" x-on:click="toggle()"
                     :aria-expanded="open" :aria-controls="$id('dropdown-button')">
                     <span>
@@ -153,6 +155,44 @@
                                 </svg>
                             </span>
                             <span :class="{ 'lg:hidden': !isSidebarOpen }">Course</span>
+                        </a>
+                    </li>
+                    @endcan
+                    @can('program-show')
+                    <li title="Program">
+                        <a class="flex items-center p-2 space-x-2 text-sm border-b hover:bg-gray-100
+                        {{ (route('admin.program.index') == substr(url()->current(), 0, strlen(route('admin.program.index')) )) ? 'bg-gray-100' : '' }}
+                        " :class="{'justify-center': !isSidebarOpen}"
+                            href="{{ route('admin.program.index') }}">
+                            <span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20"
+                                    fill="currentColor">
+                                    <path d="M4 3a2 2 0 100 4h12a2 2 0 100-4H4z" />
+                                    <path fill-rule="evenodd"
+                                        d="M3 8h14v7a2 2 0 01-2 2H5a2 2 0 01-2-2V8zm5 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </span>
+                            <span :class="{ 'lg:hidden': !isSidebarOpen }">Program</span>
+                        </a>
+                    </li>
+                    @endcan
+                    @can('enrollment-show')
+                    <li title="Enrollment">
+                        <a class="flex items-center p-2 space-x-2 text-sm border-b hover:bg-gray-100
+                        {{ (route('admin.enrollment.index') == substr(url()->current(), 0, strlen(route('admin.enrollment.index')) )) ? 'bg-gray-100' : '' }}
+                        " :class="{'justify-center': !isSidebarOpen}"
+                            href="{{ route('admin.enrollment.index') }}">
+                            <span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20"
+                                    fill="currentColor">
+                                    <path d="M4 3a2 2 0 100 4h12a2 2 0 100-4H4z" />
+                                    <path fill-rule="evenodd"
+                                        d="M3 8h14v7a2 2 0 01-2 2H5a2 2 0 01-2-2V8zm5 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </span>
+                            <span :class="{ 'lg:hidden': !isSidebarOpen }">Enrollment</span>
                         </a>
                     </li>
                     @endcan

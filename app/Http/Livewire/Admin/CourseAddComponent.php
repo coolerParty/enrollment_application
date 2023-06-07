@@ -12,6 +12,7 @@ class CourseAddComponent extends Component
     public $course_name;
     public $course_description;
     public $gpa;
+    public $student_limit;
 
     public function updated($fields)
     {
@@ -19,6 +20,7 @@ class CourseAddComponent extends Component
             'course_name'        => ['required', 'min:3', 'max:255', 'String', 'unique:courses'],
             'course_description' => ['required', 'min:3', 'max:255', 'String'],
             'gpa'                => ['required', 'numeric', 'min:0'],
+            'student_limit'      => ['required', 'numeric', 'min:0'],
         ]);
     }
 
@@ -30,12 +32,14 @@ class CourseAddComponent extends Component
             'course_name'        => ['required', 'min:3', 'max:255', 'String', 'unique:courses'],
             'course_description' => ['required', 'min:3', 'max:255', 'String'],
             'gpa'                => ['required', 'numeric', 'min:0'],
+            'student_limit'      => ['required', 'numeric', 'min:0'],
         ]);
 
         $course                     = new Course();
         $course->course_name        = $this->course_name;
         $course->course_description = $this->course_description;
         $course->gpa                = $this->gpa;
+        $course->student_limit      = $this->student_limit;
         $course->save();
 
         return redirect()->route('admin.course.index')

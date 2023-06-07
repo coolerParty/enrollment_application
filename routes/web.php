@@ -4,6 +4,10 @@ use App\Http\Livewire\Admin\AdminDashboardComponent;
 use App\Http\Livewire\Admin\CourseAddComponent;
 use App\Http\Livewire\Admin\CourseComponent;
 use App\Http\Livewire\Admin\CourseEditComponent;
+use App\Http\Livewire\Admin\EnrollmentComponent;
+use App\Http\Livewire\Admin\ProgramsAddComponent;
+use App\Http\Livewire\Admin\ProgramsComponent;
+use App\Http\Livewire\Admin\ProgramsEditComponent;
 use App\Http\Livewire\Admin\SchoolYearAddComponent;
 use App\Http\Livewire\Admin\SchoolYearComponent;
 use App\Http\Livewire\Admin\SchoolYearEditComponent;
@@ -15,30 +19,6 @@ use App\Http\Livewire\User\UserProfileComponent;
 use App\Http\Livewire\User\UserProfileEditComponent;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-// Route::middleware([
-//     'auth:sanctum',
-//     config('jetstream.auth_session'),
-//     'verified'
-// ])->group(function () {
-//     Route::get('/dashboard', function () {
-//         return view('dashboard');
-//     })->name('dashboard');
-// });
 
 
 Route::get('/', HomeComponent::class)->name('home');
@@ -73,6 +53,12 @@ Route::middleware([
     Route::get('/course', CourseComponent::class)->name('course.index');
     Route::get('/course/create', CourseAddComponent::class)->name('course.create');
     Route::get('/course/{course_id}/edit', CourseEditComponent::class)->name('course.edit');
+
+    Route::get('/enrollment', EnrollmentComponent::class)->name('enrollment.index');
+
+    Route::get('/program', ProgramsComponent::class)->name('program.index');
+    Route::get('/program/create', ProgramsAddComponent::class)->name('program.create');
+    Route::get('/program/{program_id}/edit', ProgramsEditComponent::class)->name('program.edit');
 
 });
 
