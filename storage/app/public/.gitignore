@@ -1,4 +1,3 @@
-# Ignore the public/storage directory
-# /public/storage
-
+assets/
+!.gitignore
 
