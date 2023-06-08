@@ -140,7 +140,7 @@
                                 <td class="px-6 py-4">
                                     @if($user->profile_photo_path)
                                     <img class="object-cover w-10 h-10 rounded-md cursor-pointer hover:shadow-lg"
-                                        src="{{ asset('storage/assets/user/profile-photo/thumbnail') }}/{{ $order->user->profile_photo_path }}" />
+                                        src="{{ asset('storage/assets/user/profile-photo/thumbnail') }}/{{ $user->profile_photo_path }}" />
                                     @else
                                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20"
                                         fill="currentColor">

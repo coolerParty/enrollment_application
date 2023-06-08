@@ -4,7 +4,7 @@
     <div
         class="flex flex-col items-start justify-between pb-6 space-y-4 border-b lg:items-center lg:space-y-0 lg:flex-row">
         <h1 class="text-2xl font-semibold whitespace-nowrap">Enrollment</h1>
-        @can('enrollment-create')
+        <!-- @can('enrollment-create')
         <a href="#"
             class="inline-flex items-center px-6 py-2 space-x-1 text-white bg-purple-600 rounded-md shadow hover:bg-opacity-95">
             <span>
@@ -16,7 +16,7 @@
             </span>
             <span>Add New</span>
         </a>
-        @endcan
+        @endcan -->
     </div>
     <div class="flex flex-col mt-6">
         <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -27,7 +27,7 @@
                             <tr>
                                 <th scope="col"
                                     class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                                    Student Photo
+                                    Photo
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
@@ -49,9 +49,9 @@
                                     class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                                     Created Date
                                 </th>
-                                <th scope="col" class="relative px-6 py-3">
+                                <!-- <th scope="col" class="relative px-6 py-3">
                                     Action
-                                </th>
+                                </th> -->
                             </tr>
                             <!-- flash message Start -->
                             @if(Session::has('success'))
@@ -149,7 +149,7 @@
                                 <td class="px-6 py-4">
                                     @if($enrollment->user->profile_photo_path)
                                     <img class="object-cover w-10 h-10 rounded-md cursor-pointer hover:shadow-lg"
-                                        src="{{ asset('storage/assets/user/profile-photo/thumbnail') }}/{{ $order->user->profile_photo_path }}" />
+                                        src="{{ asset('storage/assets/user/profile-photo/thumbnail') }}/{{ $enrollment->user->profile_photo_path }}" />
                                     @else
                                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20"
                                         fill="currentColor">
@@ -174,7 +174,7 @@
                                 <td class="px-6 py-4">
                                     <div class="text-sm font-semibold text-gray-900">{{ $enrollment->created_at }}</div>
                                 </td>
-                                <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
+                                <!-- <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
                                     @can('school-year-edit')
                                     <x-link-success
                                         href="#"> Edit
@@ -187,7 +187,7 @@
                                         Delete
                                     </x-link-danger>
                                     @endcan
-                                </td>
+                                </td> -->
                             </tr>
                             @empty
                             <tr class="transition-all hover:bg-gray-100 hover:shadow-lg">
