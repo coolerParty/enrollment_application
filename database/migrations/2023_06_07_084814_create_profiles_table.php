@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('city')->nullable();
             $table->string('province')->nullable();
             $table->string('country')->nullable();
+            $table->decimal('gpa')->default(0);
+            $table->boolean('scholar')->default(false);
             $table->timestamps();
         });
     }

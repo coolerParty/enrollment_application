@@ -11,6 +11,8 @@ use App\Http\Livewire\Admin\ProgramsEditComponent;
 use App\Http\Livewire\Admin\SchoolYearAddComponent;
 use App\Http\Livewire\Admin\SchoolYearComponent;
 use App\Http\Livewire\Admin\SchoolYearEditComponent;
+use App\Http\Livewire\Admin\StudentsComponent;
+use App\Http\Livewire\Admin\StudentsEditComponent;
 use App\Http\Livewire\Admin\SubjectAddComponent;
 use App\Http\Livewire\Admin\SubjectComponent;
 use App\Http\Livewire\Admin\SubjectEditComponent;
@@ -59,6 +61,9 @@ Route::middleware([
     Route::get('/program', ProgramsComponent::class)->name('program.index');
     Route::get('/program/create', ProgramsAddComponent::class)->name('program.create');
     Route::get('/program/{program_id}/edit', ProgramsEditComponent::class)->name('program.edit');
+
+    Route::get('/student', StudentsComponent::class)->name('student.index');
+    Route::get('/student/{student_id}/edit', StudentsEditComponent::class)->name('student.edit');
 
 });
 

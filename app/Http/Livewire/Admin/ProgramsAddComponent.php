@@ -15,7 +15,7 @@ class ProgramsAddComponent extends Component
     public $school_year_id;
     public $subject_id;
     public $course_id;
-    public $active;
+    public $active = true;
 
     public function updated($fields)
     {
