@@ -10,9 +10,11 @@ use Intervention\Image\Facades\Image;
 use Livewire\WithFileUploads;
 use Carbon\Carbon;
 use Illuminate\Validation\Rule;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class StudentsEditComponent extends Component
 {
+    use AuthorizesRequests;
     use WithFileUploads;
     public $student_id;
 
@@ -84,6 +86,8 @@ class StudentsEditComponent extends Component
 
     public function update()
     {
+        $this->confirmation();
+
         $this->validate([
             'name'      => ['required', 'min:3'],
             'firstname' => ['required', 'min:3'],
@@ -144,8 +148,14 @@ class StudentsEditComponent extends Component
         $this->newimage = null;
     }
 
+    public function confirmation()
+    {
+        $this->authorize('student-edit');
+    }
+
     public function render()
     {
+        $this->confirmation();
         return view('livewire.admin.students-edit-component')->layout('layouts.base');
     }
 

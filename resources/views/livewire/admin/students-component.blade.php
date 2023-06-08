@@ -175,7 +175,7 @@
                                     <div class="text-sm font-semibold text-gray-900">{{ $user->created_at }}</div>
                                 </td>
                                 <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
-                                    @can('user-edit')
+                                    @can('student-edit')
                                     <x-link-success
                                         href="{{ route('admin.student.edit',['student_id' => $user->id]) }}"> Edit
                                     </x-link-success>
