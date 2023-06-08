@@ -37,11 +37,16 @@ class PermissionSeeder extends Seeder
 				'course-year-edit',
 				'course-year-show',
 				'course-year-delete',
-                'enrollment-show',
+                'enrollment-create',
+                'enrollment-edit',
+				'enrollment-show',
+				'enrollment-delete',
                 'program-create',
 				'program-edit',
 				'program-show',
 				'program-delete',
+                'student-show',
+				'student-edit',
 
 			];
 
@@ -81,11 +86,16 @@ class PermissionSeeder extends Seeder
 				'course-year-edit',
 				'course-year-show',
 				'course-year-delete',
-                'enrollment-show',
+                'enrollment-create',
+                'enrollment-edit',
+				'enrollment-show',
+				'enrollment-delete',
                 'program-create',
 				'program-edit',
 				'program-show',
 				'program-delete',
+				'student-show',
+				'student-edit',
 			];
 
 			foreach($adminPermissions as $permission){

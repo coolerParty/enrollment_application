@@ -1,22 +1,9 @@
 <div>
-    @section('title', 'Admin / Enrollment')
+    @section('title', 'Admin / Students')
     <!-- Main content header -->
     <div
         class="flex flex-col items-start justify-between pb-6 space-y-4 border-b lg:items-center lg:space-y-0 lg:flex-row">
-        <h1 class="text-2xl font-semibold whitespace-nowrap">Enrollment</h1>
-        @can('enrollment-create')
-        <a href="#"
-            class="inline-flex items-center px-6 py-2 space-x-1 text-white bg-purple-600 rounded-md shadow hover:bg-opacity-95">
-            <span>
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-            </span>
-            <span>Add New</span>
-        </a>
-        @endcan
+        <h1 class="text-2xl font-semibold whitespace-nowrap">Students</h1>
     </div>
     <div class="flex flex-col mt-6">
         <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -27,23 +14,27 @@
                             <tr>
                                 <th scope="col"
                                     class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                                    Student Photo
+                                    Photo
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                                    Student
+                                    Username
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                                    Course
+                                    Email
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                                    Subject
+                                    Name
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                                    School Year
+                                    GPA
+                                </th>
+                                <th scope="col"
+                                    class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                    Scholar
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
@@ -144,10 +135,10 @@
                             <!-- flash message End -->
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
-                            @forelse($enrollments as $enrollment)
+                            @forelse($users as $user)
                             <tr class="transition-all hover:bg-gray-100 ">
                                 <td class="px-6 py-4">
-                                    @if($enrollment->user->profile_photo_path)
+                                    @if($user->profile_photo_path)
                                     <img class="object-cover w-10 h-10 rounded-md cursor-pointer hover:shadow-lg"
                                         src="{{ asset('storage/assets/user/profile-photo/thumbnail') }}/{{ $order->user->profile_photo_path }}" />
                                     @else
@@ -160,32 +151,34 @@
                                     @endif
                                 </td>
                                 <td class="px-6 py-4">
-                                    <div class="text-sm font-semibold text-gray-900">{{ $enrollment->user->name }}</div>
+                                    <div class="text-sm font-semibold text-gray-900">{{ $user->name }}</div>
                                 </td>
                                 <td class="px-6 py-4">
-                                    <div class="text-sm font-semibold text-gray-900">{{ $enrollment->course->course_name }}</div>
+                                    <div class="text-sm font-semibold text-gray-900">{{ $user->email }}</div>
                                 </td>
                                 <td class="px-6 py-4">
-                                    <div class="text-sm font-semibold text-gray-900">{{ $enrollment->subject->sub_name }}</div>
+                                    <div class="text-sm font-semibold text-gray-900">{{ $user->profile->firstname }} {{ $user->profile->lastname }}</div>
                                 </td>
                                 <td class="px-6 py-4">
-                                    <div class="text-sm font-semibold text-gray-900">{{ $enrollment->schoolYear->school_yr }}</div>
+                                    <div class="text-sm font-semibold text-gray-900">{{ $user->profile->gpa }}</div>
                                 </td>
                                 <td class="px-6 py-4">
-                                    <div class="text-sm font-semibold text-gray-900">{{ $enrollment->created_at }}</div>
+                                    <div class="text-sm font-semibold text-gray-900">
+                                        @if($user->profile->scholar)
+                                            <span class="bg-green-300 py-1 px-4 rounded-md">Yes</span>
+                                        @else
+                                            <span class="bg-gray-300 py-1 px-4 rounded-md">No</span>
+                                        @endif
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <div class="text-sm font-semibold text-gray-900">{{ $user->created_at }}</div>
                                 </td>
                                 <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
-                                    @can('school-year-edit')
+                                    @can('user-edit')
                                     <x-link-success
-                                        href="#"> Edit
+                                        href="{{ route('admin.student.edit',['student_id' => $user->id]) }}"> Edit
                                     </x-link-success>
-                                    @endcan
-                                    @can('school-year-delete')
-                                    <x-link-danger href="" class="btn btn-danger btn-sm text-light"
-                                        onclick="confirm('Are you sure, You want to delete this school Year?') || event.stopImmediatePropagation()"
-                                        wire:click.prevent="destroy({{ $enrollment->id }})">
-                                        Delete
-                                    </x-link-danger>
                                     @endcan
                                 </td>
                             </tr>
@@ -199,7 +192,7 @@
                         </tbody>
                     </table>
                     <div class="p-4">
-                        {!! $enrollments->links() !!}
+                        {!! $users->links() !!}
                     </div>
                 </div>
             </div>

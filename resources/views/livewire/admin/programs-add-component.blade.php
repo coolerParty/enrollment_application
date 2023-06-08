@@ -74,7 +74,7 @@
                         <select id="active" name="active" autocomplete="active" wire:model.lazy="active" required
                             class="block w-full px-4 py-2 mt-2 bg-white border border-gray-200 rounded-md shadow-sm dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:outline-none focus:ring focus:border-blue-400 dark:focus:border-blue-300 sm:text-sm
                             @error('active') border-red-500 @enderror">
-                            <option value="1">Active</option>
+                            <option value="1" Selected>Active</option>
                             <option value="0">Inactive</option>
                             @error('active')<p class="text-xs italic text-red-500">{{ $message }}</p>@enderror
                         </select>
