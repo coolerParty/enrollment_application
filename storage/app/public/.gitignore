@@ -1,4 +1,4 @@
 *
-public/storage/assets/
-.gitignore
+!public/storage/assets/
+
 
