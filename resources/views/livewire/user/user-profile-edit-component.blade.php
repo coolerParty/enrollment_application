@@ -60,18 +60,14 @@
                     @elseif($profile_photo_path)
                     <img
                         class="w-3/4 p-5 mx-auto rounded-full"
-                        src="{{
-                            asset('storage/assets/user/profile-photo/large')
-                        }}/{{ $profile_photo_path }}"
+                        src="{{ asset('storage/assets/user/profile-photo/large') }}/{{ $profile_photo_path }}"
                         width="100%"
                         alt=""
                     />
                     @else
                     <img
                         class="w-3/4 p-5 mx-auto rounded-full"
-                        src="{{
-                            asset('storage/assets/user/profile-photo/large')
-                        }}/default.png"
+                        src="{{ asset('storage/assets/user/profile-photo/large') }}/default.png"
                         width="100%"
                         alt=""
                     />
