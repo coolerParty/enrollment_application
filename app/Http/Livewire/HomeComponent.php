@@ -18,12 +18,12 @@ class HomeComponent extends Component
 
         $profile = Profile::where('user_id', Auth::user()->id)->first();
 
-        if($profile->gpa <= 50 and $profile->scholar = true)
+        if($profile->gpa <= 50 and $profile->scholar == true)
         {
             return redirect()->route('home')
             ->with('error', ' You are below GPA requirement!');
         }
-        if($profile->gpa < $course->gpa and $profile->scholar = false)
+        if($profile->gpa < $course->gpa and $profile->scholar == false)
         {
             return redirect()->route('home')
             ->with('error', 'You are below GPA requirement!');
